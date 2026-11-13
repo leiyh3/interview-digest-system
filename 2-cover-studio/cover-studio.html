@@ -1,0 +1,400 @@
+<title>封面工坊</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: a two-pane studio. Controls on the left, a 3:4 cover preview on the right that stays in view; on phones the preview comes first and the controls stack below. */
+:root {
+  --bg: #eef0f4;
+  --panel: #ffffff;
+  --fg: #151a22;
+  --muted: #596273;
+  --line: #d3d8e0;
+  --field: #f7f8fa;
+  --accent: #1d4ed8;
+  --accent-fg: #ffffff;
+  --font: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1016; --panel: #161a22; --fg: #e8ebf1; --muted: #99a2b2;
+    --line: #2a303b; --field: #0f1319; --accent: #6c93ff; --accent-fg: #0d1016;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1016; --panel: #161a22; --fg: #e8ebf1; --muted: #99a2b2;
+  --line: #2a303b; --field: #0f1319; --accent: #6c93ff; --accent-fg: #0d1016;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.55;
+  padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+h1 { margin: 0; font-size: 26px; font-weight: 900; letter-spacing: .02em; text-wrap: balance; }
+.lede { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
+.app { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.controls { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field > label, .legend { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--muted); }
+input[type="text"], select {
+  width: 100%; font: inherit; color: var(--fg); background: var(--field);
+  border: 1px solid var(--line); border-radius: 6px; padding: 9px 11px;
+}
+input[type="file"] { font: inherit; font-size: 13px; color: var(--muted); max-width: 100%; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 13px; font-weight: 500;
+  color: var(--fg); background: var(--field); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px 6px 7px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.sw { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(128,128,128,.4); }
+.tagchip { padding: 5px 12px; }
+.hint { font-size: 12px; color: var(--muted); margin: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+button.primary {
+  font: inherit; font-weight: 700; cursor: pointer; border: 0; border-radius: 6px;
+  background: var(--accent); color: var(--accent-fg); padding: 10px 18px;
+}
+button.quiet {
+  font: inherit; cursor: pointer; background: transparent; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 6px; padding: 9px 14px;
+}
+.stage { position: sticky; top: max(16px, env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+#cv { width: 100%; max-width: 480px; height: auto; aspect-ratio: 3 / 4; display: block; border-radius: 4px; border: 1px solid var(--line); background: #0a1a3a; }
+.status { min-height: 1.5em; font-size: 13px; color: var(--muted); margin: 0; }
+#outwrap[hidden] { display: none; }
+#outwrap img { max-width: min(100%, 480px); height: auto; display: block; border-radius: 4px; }
+@media (max-width: 760px) {
+  .app { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .stage { position: static; order: -1; }
+  #cv { max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>封面工坊</h1>
+    <p class="lede">填入选题文案，上传人物照片，生成 3:4（1080×1440）或 9:16（1080×1920）的竖版封面。9:16 版把主要文字放在中部，被裁成 3:4 时也不会切掉。照片只在你的浏览器里处理，不会上传。</p>
+  </header>
+
+  <div class="app">
+    <form class="controls" id="form" onsubmit="return false">
+      <div class="field">
+        <span class="legend">栏目标签</span>
+        <div class="chips" id="tagchips"></div>
+        <input type="text" id="tag" maxlength="8" value="AI 精读" aria-label="栏目标签">
+      </div>
+      <div class="field">
+        <label for="l1">主标题第一行</label>
+        <input type="text" id="l1" maxlength="14" value="这位 CEO 说了一句">
+      </div>
+      <div class="field">
+        <label for="l2">主标题第二行（高亮色）</label>
+        <input type="text" id="l2" maxlength="14" value="全场安静了 3 秒">
+      </div>
+      <div class="field">
+        <label for="sub">副标题（人物身份、数字或悬念）</label>
+        <input type="text" id="sub" maxlength="28" value="示例文案，换成你的选题">
+      </div>
+      <div class="field">
+        <label for="handle">账号名（可留空）</label>
+        <input type="text" id="handle" maxlength="20" value="你的账号名">
+      </div>
+      <div class="field">
+        <label for="photo">人物照片</label>
+        <input type="file" id="photo" accept="image/*">
+        <p class="hint">用你有使用权的照片或截图。未上传时显示占位轮廓。</p>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="size">尺寸</label>
+          <select id="size">
+            <option value="1440">3:4（1080×1440）</option>
+            <option value="1920">9:16（1080×1920）</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tone">照片风格</label>
+          <select id="tone">
+            <option value="duo">双色调</option>
+            <option value="gray">黑白</option>
+            <option value="orig">原图</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="zoom">缩放</label>
+          <input type="range" id="zoom" min="100" max="260" value="120">
+        </div>
+        <div class="field">
+          <label for="px">水平位置</label>
+          <input type="range" id="px" min="0" max="100" value="50">
+        </div>
+        <div class="field">
+          <label for="py">垂直位置</label>
+          <input type="range" id="py" min="0" max="100" value="20">
+        </div>
+      </div>
+      <div class="field">
+        <span class="legend">配色</span>
+        <div class="chips" id="palchips"></div>
+      </div>
+      <div class="actions">
+        <button type="button" class="primary" id="save">保存 PNG</button>
+        <button type="button" class="quiet" id="reset">恢复示例</button>
+      </div>
+    </form>
+
+    <div class="stage">
+      <canvas id="cv" width="1080" height="1440" role="img" aria-label="封面预览"></canvas>
+      <p class="status" id="status" aria-live="polite"></p>
+      <div id="outwrap" hidden>
+        <p class="hint">长按或右键下面的图片即可保存。</p>
+        <img id="out" alt="导出的封面图片">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var W = 1080, H = 1440;
+  var FONT = '"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif';
+  var PAL = {
+    navy:  { name: '深海蓝', bg: ['#0a1a3a', '#12306b'], fg: '#ffffff', sub: '#c9d6f2', accent: '#ffd21f', tagFg: '#0a1a3a', lo: [8, 20, 46],  hi: [210, 226, 255], dot: 'rgba(255,255,255,0.05)' },
+    ember: { name: '炭黑橙', bg: ['#0c0c0d', '#1e1510'], fg: '#ffffff', sub: '#e9d3bf', accent: '#ff7a1a', tagFg: '#140c06', lo: [18, 12, 8],  hi: [255, 222, 190], dot: 'rgba(255,255,255,0.045)' },
+    paper: { name: '纸色',   bg: ['#efe7d4', '#e2d5b6'], fg: '#1b1a17', sub: '#4a4333', accent: '#d2461a', tagFg: '#ffffff', lo: [38, 26, 16],  hi: [246, 236, 214], dot: 'rgba(0,0,0,0.06)' }
+  };
+  var TAGS = ['AI 精读', 'AI 硬拆', '科技精读', '科技硬拆'];
+  var DEFAULTS = { size: '1440', tag: 'AI 精读', l1: '这位 CEO 说了一句', l2: '全场安静了 3 秒', sub: '示例文案，换成你的选题', handle: '你的账号名', tone: 'duo', zoom: '120', px: '50', py: '20' };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var cv = $('cv'), ctx = cv.getContext('2d');
+  var palKey = 'navy', img = null, raf = 0, dl = null;
+
+  function status(msg) { $('status').textContent = msg || ''; }
+
+  // palette + tag chips
+  var pc = $('palchips');
+  Object.keys(PAL).forEach(function (k) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.k = k;
+    var sw = document.createElement('span'); sw.className = 'sw';
+    sw.style.background = 'linear-gradient(135deg,' + PAL[k].bg[0] + ' 50%,' + PAL[k].accent + ' 50%)';
+    b.appendChild(sw); b.appendChild(document.createTextNode(PAL[k].name));
+    b.addEventListener('click', function () { palKey = k; syncChips(); schedule(); });
+    pc.appendChild(b);
+  });
+  var tc = $('tagchips');
+  TAGS.forEach(function (t) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip tagchip'; b.textContent = t;
+    b.addEventListener('click', function () { $('tag').value = t; schedule(); });
+    tc.appendChild(b);
+  });
+  function syncChips() {
+    Array.prototype.forEach.call(pc.children, function (b) { b.setAttribute('aria-pressed', b.dataset.k === palKey ? 'true' : 'false'); });
+  }
+
+  function rr(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function fit(text, weight, max, min, maxW) {
+    var s = max;
+    ctx.font = weight + ' ' + s + 'px ' + FONT;
+    while (s > min && ctx.measureText(text).width > maxW) { s -= 2; ctx.font = weight + ' ' + s + 'px ' + FONT; }
+    return s;
+  }
+
+  function photoLayer(pal, w, h) {
+    var oc = document.createElement('canvas'); oc.width = w; oc.height = h;
+    var o = oc.getContext('2d');
+    if (!img) {
+      // placeholder silhouette
+      var c = 'rgba(' + pal.hi[0] + ',' + pal.hi[1] + ',' + pal.hi[2] + ',0.16)';
+      o.fillStyle = c;
+      o.beginPath(); o.arc(w * 0.5, h * 0.36, 150, 0, Math.PI * 2); o.fill();
+      o.beginPath(); o.ellipse(w * 0.5, h * 0.9, 330, 300, 0, Math.PI, 0); o.fill();
+      o.font = '500 34px ' + FONT; o.textAlign = 'center';
+      o.fillStyle = 'rgba(' + pal.hi[0] + ',' + pal.hi[1] + ',' + pal.hi[2] + ',0.55)';
+      o.fillText('上传人物照片', w * 0.5, h * 0.62);
+    } else {
+      var zoom = parseInt($('zoom').value, 10) / 100;
+      var ax = parseInt($('px').value, 10) / 100, ay = parseInt($('py').value, 10) / 100;
+      var sc = Math.max(w / img.naturalWidth, h / img.naturalHeight) * zoom;
+      var dw = img.naturalWidth * sc, dh = img.naturalHeight * sc;
+      o.drawImage(img, -(dw - w) * ax, -(dh - h) * ay, dw, dh);
+      var tone = $('tone').value;
+      if (tone !== 'orig') {
+        var d = o.getImageData(0, 0, w, h), p = d.data;
+        for (var i = 0; i < p.length; i += 4) {
+          var l = (0.299 * p[i] + 0.587 * p[i + 1] + 0.114 * p[i + 2]) / 255;
+          l = Math.min(1, Math.max(0, (l - 0.5) * 1.25 + 0.5));
+          if (tone === 'gray') { p[i] = p[i + 1] = p[i + 2] = l * 255; }
+          else {
+            p[i]     = pal.lo[0] + (pal.hi[0] - pal.lo[0]) * l;
+            p[i + 1] = pal.lo[1] + (pal.hi[1] - pal.lo[1]) * l;
+            p[i + 2] = pal.lo[2] + (pal.hi[2] - pal.lo[2]) * l;
+          }
+        }
+        o.putImageData(d, 0, 0);
+      }
+    }
+    // fade the top edge into the background
+    o.globalCompositeOperation = 'destination-in';
+    var g = o.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.38, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,1)');
+    o.fillStyle = g; o.fillRect(0, 0, w, h);
+    return oc;
+  }
+
+  function setSize() {
+    var h = parseInt($('size').value, 10) || 1440;
+    if (h !== H) { H = h; cv.height = H; cv.style.aspectRatio = '1080 / ' + H; }
+  }
+
+  function draw() {
+    setSize();
+    var pal = PAL[palKey];
+    var Y0 = (H - 1440) / 2;   // keep the 3:4 safe area centred on taller canvases
+    ctx.clearRect(0, 0, W, H);
+    // background
+    var bg = ctx.createLinearGradient(0, 0, W * 0.6, H);
+    bg.addColorStop(0, pal.bg[0]); bg.addColorStop(1, pal.bg[1]);
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    // halftone dots
+    ctx.fillStyle = pal.dot;
+    for (var y = 14; y < H; y += 30) for (var x = ((y / 30) % 2 ? 29 : 14); x < W; x += 30) { ctx.beginPath(); ctx.arc(x, y, 2.4, 0, Math.PI * 2); ctx.fill(); }
+    // glow behind the person
+    var gl = ctx.createRadialGradient(W * 0.5, H * 0.78, 40, W * 0.5, H * 0.78, 620);
+    gl.addColorStop(0, pal.accent + '33'); gl.addColorStop(1, pal.accent + '00');
+    ctx.fillStyle = gl; ctx.fillRect(0, 0, W, H);
+    // photo
+    var ph = 920 + Y0;
+    ctx.drawImage(photoLayer(pal, W, ph), 0, H - ph);
+
+    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    // tag
+    var tag = $('tag').value.trim();
+    if (tag) {
+      ctx.font = '700 36px ' + FONT;
+      var tw = ctx.measureText(tag).width;
+      ctx.fillStyle = pal.accent; rr(72, 72 + Y0, tw + 44, 66, 12); ctx.fill();
+      ctx.fillStyle = pal.tagFg; ctx.fillText(tag, 94, 118 + Y0);
+    }
+    // headline
+    var l1 = $('l1').value.trim(), l2 = $('l2').value.trim();
+    var maxW = W - 144;
+    var s = Math.min(fit(l1 || ' ', 900, 168, 72, maxW), fit(l2 || ' ', 900, 168, 72, maxW));
+    var b1 = 190 + Y0 + s * 0.92, b2 = b1 + s * 1.1;
+    ctx.font = '900 ' + s + 'px ' + FONT;
+    ctx.shadowColor = 'rgba(0,0,0,0.38)'; ctx.shadowOffsetX = 6; ctx.shadowOffsetY = 6; ctx.shadowBlur = 0;
+    ctx.fillStyle = pal.fg; ctx.fillText(l1, 72, b1);
+    ctx.fillStyle = pal.accent; ctx.fillText(l2, 72, b2);
+    ctx.shadowColor = 'transparent'; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
+    // subtitle
+    var sub = $('sub').value.trim();
+    if (sub) {
+      var ss = fit(sub, 700, 50, 28, maxW - 28);
+      var sy = b2 + 46 + ss;
+      ctx.fillStyle = pal.accent; ctx.fillRect(72, sy - ss * 0.88, 8, ss * 1.1);
+      ctx.fillStyle = pal.sub; ctx.font = '700 ' + ss + 'px ' + FONT; ctx.fillText(sub, 96, sy);
+    }
+    // handle
+    var hd = $('handle').value.trim();
+    if (hd) {
+      ctx.font = '500 30px ' + FONT; ctx.fillStyle = pal.sub; ctx.globalAlpha = 0.85;
+      ctx.fillText('@' + hd, 72, H - Y0 - 56); ctx.globalAlpha = 1;
+    }
+  }
+
+  function fontText() {
+    return ['tag', 'l1', 'l2', 'sub', 'handle'].map(function (k) { return $(k).value; }).join('') + '上传人物照片@AI科技精读硬拆0123456789';
+  }
+  function ensureFonts() {
+    var t = fontText();
+    return Promise.all([
+      document.fonts.load('900 100px "Noto Sans SC"', t),
+      document.fonts.load('700 40px "Noto Sans SC"', t),
+      document.fonts.load('500 30px "Noto Sans SC"', t)
+    ]).catch(function () {});
+  }
+  function schedule() {
+    if (raf) return;
+    raf = requestAnimationFrame(function () {
+      raf = 0;
+      draw();
+      ensureFonts().then(draw);
+    });
+  }
+
+  ['size', 'tag', 'l1', 'l2', 'sub', 'handle', 'tone', 'zoom', 'px', 'py'].forEach(function (id) {
+    $(id).addEventListener('input', schedule);
+    $(id).addEventListener('change', schedule);
+  });
+
+  $('photo').addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var im = new Image();
+    im.onload = function () { img = im; status('照片已载入。可以调整缩放和位置。'); schedule(); };
+    im.onerror = function () { status('这张图片无法读取，请换一张 JPG 或 PNG。'); };
+    im.src = URL.createObjectURL(f);
+  });
+
+  $('reset').addEventListener('click', function () {
+    Object.keys(DEFAULTS).forEach(function (k) { $(k).value = DEFAULTS[k]; });
+    palKey = 'navy'; img = null; $('photo').value = ''; $('outwrap').hidden = true;
+    syncChips(); status(''); schedule();
+  });
+
+  $('save').addEventListener('click', function () {
+    draw();
+    cv.toBlob(function (blob) {
+      if (!blob) { status('生成图片失败，请重试。'); return; }
+      if (!dl) {
+        $('out').src = cv.toDataURL('image/png'); $('outwrap').hidden = false;
+        status('当前环境不能直接下载，已生成图片。');
+        return;
+      }
+      dl.save({ filename: 'cover-' + Date.now() + '.png', data: blob }).then(
+        function () { status('已保存。'); },
+        function (err) {
+          if (err && err.code === 'declined') { status('已取消保存。'); return; }
+          $('out').src = cv.toDataURL('image/png'); $('outwrap').hidden = false;
+          status('直接保存没有成功，已生成图片，请长按保存。');
+        }
+      );
+    }, 'image/png');
+  });
+
+  syncChips();
+  draw();
+  schedule();
+  try {
+    if (window.claude && window.claude.use) {
+      window.claude.use('downloads').then(function (d) { dl = d || null; }, function () { dl = null; });
+    }
+  } catch (e) { dl = null; }
+})();
+</script>

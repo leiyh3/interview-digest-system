@@ -1,0 +1,38 @@
+# Python 虚拟环境与缓存（约 3GB，不进仓库）
+.venv/
+__pycache__/
+*.pyc
+
+# 音视频等大文件（成片、预览、录音、素材）
+*.mp4
+*.mkv
+*.mov
+*.wav
+*.m4a
+*.mp3
+*.pt
+
+# 每期工作目录里的生成物（保留 storyline、plan.json、HANDOFF 等文本文件）
+workspace/episodes/**/build/
+workspace/episodes/**/build_final/
+workspace/episodes/**/tech_qa/
+workspace/episodes/**/tech_qa_final/
+workspace/episodes/**/qa/
+workspace/episodes/**/vo/
+workspace/episodes/**/frames/
+workspace/episodes/**/video/
+workspace/episodes/**/*.json.bak
+
+# scout 运行数据：原始收件箱和字幕（sources.json、pool.md、pool/ 选题池保留跟踪）
+workspace/scout/inbox/
+workspace/scout/captions/
+workspace/scout/fetch.log
+
+# 账号后台导出的数据表（含运营数据，不上传）
+workspace/data/*.csv
+workspace/data/*_findings.md
+
+# 系统杂项
+Thumbs.db
+.DS_Store
+desktop.ini

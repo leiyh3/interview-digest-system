@@ -1,0 +1,21 @@
+{
+ "youtube:@DwarkeshPatel": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZa18YV7qayTh-MRIrBhDpA",
+ "youtube:@lexfridman": "https://www.youtube.com/feeds/videos.xml?channel_id=UCJIfeSCssxSC_Dhc5s7woww",
+ "youtube:@NoPriorsPodcast": "https://www.youtube.com/feeds/videos.xml?channel_id=UCSI7h9hydQ40K5MJHnCrQvw",
+ "youtube:@LennysPodcast": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6t1O76G0jYXOAoYCm153dA",
+ "youtube:@AcquiredFM": "https://www.youtube.com/feeds/videos.xml?channel_id=UCyFqFYfTW2VoIQKylJ04Rtw",
+ "youtube:@a16z": "https://www.youtube.com/feeds/videos.xml?channel_id=UCQ1VQj-37kl2yS_VUhfQHsw",
+ "youtube:@ycombinator": "https://www.youtube.com/feeds/videos.xml?channel_id=UCxIJaCMEptJjxmmQgGFsnCg",
+ "youtube:@allin": "https://www.youtube.com/feeds/videos.xml?channel_id=UCESLZhusAkFfsNsApnjF_Cg",
+ "youtube:@OpenAI": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXZCJLdBC09xxGZ6gcdrc6A",
+ "youtube:@anthropic-ai": "https://www.youtube.com/feeds/videos.xml?channel_id=UCrDwWp7EBBv4NwvScIpBDOA",
+ "youtube:@googledeepmind": "https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A",
+ "youtube:@GoogleDevelopers": "https://www.youtube.com/feeds/videos.xml?channel_id=UC_x5XG1OV2P6uZZ5FSM9Ttw",
+ "youtube:@NVIDIA": "https://www.youtube.com/feeds/videos.xml?channel_id=UCL-g3eGJi1omSDSz48AML-g",
+ "youtube:@stanfordonline": "https://www.youtube.com/feeds/videos.xml?channel_id=UCBa5G_ESCn8Yd4vw5U-gIcg",
+ "youtube:@mitocw": "https://www.youtube.com/feeds/videos.xml?channel_id=UCEBb1b_L6zDS3xTUrIALZOw",
+ "rss:https://openai.com/news/rss.xml": "https://openai.com/news/rss.xml",
+ "rss:https://deepmind.google/blog/rss.xml": "https://deepmind.google/blog/rss.xml",
+ "rss:https://huggingface.co/blog/feed.xml": "https://huggingface.co/blog/feed.xml",
+ "rss:https://blog.samaltman.com/posts.atom": "https://blog.samaltman.com/posts.atom"
+}

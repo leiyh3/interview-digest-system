@@ -1,0 +1,29 @@
+{
+  "_说明": "每日素材源。type：youtube（填 handle，脚本自动解析频道）、rss（填 RSS/Atom 地址）、podcast（填节目名，用 Apple 播客目录找 RSS）、web（没有 RSS 的页面，由 Claude 在 /scout 时用网页工具查看）。enabled 改成 false 可暂停某个源。第一次用先跑 scout.py check，解析失败的源改一下 handle 或地址。",
+  "lookback_days": 3,
+  "sources": [
+    {"name": "Dwarkesh Patel", "category": "播客访谈", "type": "youtube", "handle": "@DwarkeshPatel", "enabled": true},
+    {"name": "Lex Fridman", "category": "播客访谈", "type": "youtube", "handle": "@lexfridman", "enabled": true},
+    {"name": "No Priors", "category": "播客访谈", "type": "youtube", "handle": "@NoPriorsPodcast", "enabled": true},
+    {"name": "Lenny's Podcast", "category": "播客访谈", "type": "youtube", "handle": "@LennysPodcast", "enabled": true},
+    {"name": "Acquired", "category": "播客访谈", "type": "youtube", "handle": "@AcquiredFM", "enabled": true},
+    {"name": "a16z", "category": "播客访谈", "type": "youtube", "handle": "@a16z", "enabled": true},
+    {"name": "Y Combinator", "category": "播客访谈", "type": "youtube", "handle": "@ycombinator", "enabled": true},
+    {"name": "All-In", "category": "播客访谈", "type": "youtube", "handle": "@allin", "enabled": true},
+
+    {"name": "OpenAI", "category": "大会演讲", "type": "youtube", "handle": "@OpenAI", "enabled": true},
+    {"name": "Anthropic", "category": "大会演讲", "type": "youtube", "handle": "@anthropic-ai", "enabled": true},
+    {"name": "Google DeepMind", "category": "大会演讲", "type": "youtube", "handle": "@googledeepmind", "enabled": true},
+    {"name": "Google for Developers", "category": "大会演讲", "type": "youtube", "handle": "@GoogleDevelopers", "enabled": true},
+    {"name": "NVIDIA", "category": "大会演讲", "type": "youtube", "handle": "@NVIDIA", "enabled": true},
+    {"name": "Stanford Online", "category": "大会演讲", "type": "youtube", "handle": "@stanfordonline", "enabled": true},
+    {"name": "MIT OpenCourseWare", "category": "大会演讲", "type": "youtube", "handle": "@mitocw", "enabled": true},
+
+    {"name": "OpenAI 新闻", "category": "一手文章", "type": "rss", "url": "https://openai.com/news/rss.xml", "enabled": true},
+    {"name": "Google DeepMind 博客", "category": "一手文章", "type": "rss", "url": "https://deepmind.google/blog/rss.xml", "enabled": true},
+    {"name": "Hugging Face 博客", "category": "一手文章", "type": "rss", "url": "https://huggingface.co/blog/feed.xml", "enabled": true},
+    {"name": "Sam Altman 博客", "category": "一手文章", "type": "rss", "url": "https://blog.samaltman.com/posts.atom", "enabled": true},
+    {"name": "Anthropic 新闻", "category": "一手文章", "type": "web", "url": "https://www.anthropic.com/news", "enabled": true},
+    {"name": "Hugging Face 每日论文", "category": "一手文章", "type": "web", "url": "https://huggingface.co/papers", "enabled": true}
+  ]
+}
